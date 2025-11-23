@@ -29,7 +29,8 @@ jobs:
       - name: Build the app
         run: |
           cd unleashed-firmware
-          ./fbt fap_text_test
+          ./fbt fap_text_test_app
+
 
       - name: Upload compiled FAP
         uses: actions/upload-artifact@v4
