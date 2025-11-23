@@ -1,0 +1,38 @@
+name: Build Flipper App (Unleashed)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt update
+          sudo apt install -y git python3 python3-pip cmake gcc-arm-none-eabi binutils-arm-none-eabi build-essential
+
+      - name: Clone Unleashed Firmware
+        run: |
+          git clone --recursive https://github.com/DarkFlippers/unleashed-firmware.git
+          cd unleashed-firmware
+          git submodule update --init --recursive
+
+      - name: Copy your app into firmware
+        run: |
+          cp -r ./text_test unleashed-firmware/applications_user/
+
+      - name: Build the app
+        run: |
+          cd unleashed-firmware
+          ./fbt fap_text_test
+
+      - name: Upload compiled FAP
+        uses: actions/upload-artifact@v4
+        with:
+          name: text-test-fap
+          path: unleashed-firmware/build/f7-firmware-D/applications_user/text_test/*.fap
