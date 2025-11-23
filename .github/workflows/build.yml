@@ -25,7 +25,8 @@ jobs:
       - name: Copy your app into firmware
         run: |
           mkdir -p unleashed-firmware/applications_user/text_test
-          cp text_test/* unleashed-firmware/applications_user/text_test/
+          cp ./text-test/text_test/* unleashed-firmware/applications_user/text_test/
+          
 
       - name: Build the app
         run: |
