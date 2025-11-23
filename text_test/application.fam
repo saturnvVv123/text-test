@@ -1,0 +1,4 @@
+App:
+  Name: "Text Test"
+  EntryPoint: text_test_app
+  Version: 1
