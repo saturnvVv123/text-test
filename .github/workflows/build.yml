@@ -24,13 +24,13 @@ jobs:
 
       - name: Copy your app into firmware
         run: |
-          cp -r ./text_test unleashed-firmware/applications_user/
+          mkdir -p unleashed-firmware/applications_user/text_test
+          cp text_test/* unleashed-firmware/applications_user/text_test/
 
       - name: Build the app
         run: |
           cd unleashed-firmware
-          ./fbt fap_text_test_app
-
+          ./fbt fap_text_test
 
       - name: Upload compiled FAP
         uses: actions/upload-artifact@v4
